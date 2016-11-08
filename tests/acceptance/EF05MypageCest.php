@@ -272,7 +272,7 @@ class EF05MypageCest
         $I->click('#main_middle #deliveradd_select .address_table:nth-child(2) .addr_box .icon_edit a');
 
         /*
-            ToDo: popup
+            ToDo: [popup]
             PhantomJSではpopupをハンドリングできない。。よって現状はテスト不可
         // 確認alertでOK
         $I->acceptPopup();

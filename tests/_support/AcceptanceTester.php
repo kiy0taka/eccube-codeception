@@ -140,6 +140,6 @@ class AcceptanceTester extends \Codeception\Actor
         $I = $this;
         $I->click('#form_cart .item_box .icon_edit a');
         $I->acceptPopup();
-        /* ToDo: popup*/
+        /* ToDo: [popup] popup*/
     }
 }

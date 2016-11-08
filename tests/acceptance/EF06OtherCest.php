@@ -81,7 +81,7 @@ class EF06OtherCest
         ]);
         $I->see('パスワード発行メールの送信 完了', '#main .page-heading');
 
-        // メールは受け取れないので、新しいパスワードでのログインテストは不可
+        // TODO [mail] メールは受け取れないので、新しいパスワードでのログインテストは不可
     }
 
     public function other_ログアウト(\AcceptanceTester $I)
@@ -134,6 +134,6 @@ class EF06OtherCest
         $I->click('#footer ul li:nth-child(4) a');
         $I->see('お問い合わせ', '#main h1');
 
-        // メールは受け取れないので、テスト不可
+        // TODO [mail] メールは受け取れないので、テスト不可
     }
 }
