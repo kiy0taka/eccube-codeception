@@ -142,4 +142,18 @@ class AcceptanceTester extends \Codeception\Actor
         $I->acceptPopup();
         /* ToDo: [popup] popup*/
     }
+
+    public function getLastDownloadFile()
+    {
+        $downloadDir = __DIR__ . '/_downloads/';
+        $files = scandir($downloadDir);
+        $files = array_filter($files, function ($fileName) use ($downloadDir) {
+            return is_file($downloadDir.$fileName);
+        });
+        usort($files, function($l, $r) use ($downloadDir) {
+            return filemtime($downloadDir.$l) - filemtime($downloadDir.$r);
+        });
+        $f = end($files);
+        return $downloadDir.$f;
+    }
 }

@@ -26,6 +26,7 @@ modules:
             wait: 10
             capabilities:
                 unexpectedAlertBehaviour: 'accept'
+                firefox_profile: '/root/ff_profile.zip.b64'
 
 env:
     default:

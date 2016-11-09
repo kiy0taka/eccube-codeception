@@ -54,28 +54,26 @@ class EA03ProductCest
     {
         $I->wantTo('EA0301-UC02-T01 CSV出力');
 
-        ProductManagePage::go($I)->検索();
+        $findProducts = Fixtures::get('findProducts');
+        $Products = $findProducts();
+        ProductManagePage::go($I)
+            ->検索()
+            ->CSVダウンロード();
 
-        // 「CSVダウンロード」ドロップダウン
-        $I->click(ProductManagePage::$検索結果_CSVダウンロード);
-        // 「CSVダウンロード」リンク
-        $I->click(ProductManagePage::$検索結果_CSVダウンロード_CSVダウンロード);
+        $I->see("検索結果 ".count($Products)." 件 が該当しました", ProductManagePage::$検索結果_メッセージ);
 
-        /**
-         * TODO [download] clientに指定しているphantomjsのdockerコンテナにダウンロードされているかどうかは現在確認不可
-         */
+        $ProductCSV = $I->getLastDownloadFile();
+        $I->assertRegExp('/^product_\d{14}\.csv$/', basename($ProductCSV));
+        $I->assertGreaterOrEquals(count($Products), count(file($ProductCSV)), '検索結果以上の行数があるはず');
     }
 
     public function product_CSV出力項目設定(\AcceptanceTester $I)
     {
         $I->wantTo('EA0301-UC02-T02 CSV出力項目設定');
 
-        ProductManagePage::go($I)->検索();
-
-        // 「CSVダウンロード」ドロップダウン
-        $I->click(ProductManagePage::$検索結果_CSVダウンロード);
-        // 「CSV出力項目設定」リンク
-        $I->click(ProductManagePage::$検索結果_CSVダウンロード_出力項目設定);
+        ProductManagePage::go($I)
+            ->検索()
+            ->CSV出力項目設定();
 
         $I->see('システム設定CSV出力項目設定', self::ページタイトル);
         $value = $I->grabValueFrom(CsvSettingsPage::$CSVタイプ);
@@ -377,6 +375,10 @@ class EA03ProductCest
 
         // 雛形のダウンロード
         $ProductCsvUploadPage->雛形ダウンロード();
+        $ProductTemplateCSV = $I->getLastDownloadFile();
+        $I->assertEquals('product.csv', basename($ProductTemplateCSV));
+        $I->assertEquals(1, count(file($ProductTemplateCSV)));
+
         /* TODO [download] ダウンロードファイルの確認は不可*/
     }
 

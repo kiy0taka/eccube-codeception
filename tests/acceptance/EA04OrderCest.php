@@ -52,9 +52,15 @@ class EA04OrderCest
         $OrderListPage = OrderManagePage::go($I)->検索();
         $I->see('検索結果 '.count($TargetOrders).' 件 が該当しました', OrderManagePage::$検索結果_メッセージ);
 
-        /* TODO [download] ダウンロード（ダウンロードはチェックできないので、テスト不可） */
         $OrderListPage->受注CSVダウンロード実行();
+        $OrderCSV = $I->getLastDownloadFile();
+        $I->assertRegExp('/^order_\d{14}\.csv$/', basename($OrderCSV));
+        $I->assertGreaterOrEquals(count($TargetOrders), count(file($OrderCSV)), '検索結果以上の行数があるはず');
+
         $OrderListPage->配送CSVダウンロード実行();
+        $ShippingCSV = $I->getLastDownloadFile();
+        $I->assertRegExp('/^shipping_\d{14}\.csv$/', basename($ShippingCSV));
+        $I->assertGreaterOrEquals(count($TargetOrders), count(file($ShippingCSV)), '検索結果以上の行数があるはず');
 
         /* 項目設定 */
         $OrderListPage->受注CSV出力項目設定();
