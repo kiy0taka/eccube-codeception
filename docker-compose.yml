@@ -7,6 +7,7 @@ services:
       - POSTGRES_USER=cube3_dev_user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=cube3_dev
+    network_mode: "host"
   eccube3:
     build:
       context: eccube3
@@ -18,16 +19,15 @@ services:
       - TZ=Asia/Tokyo
       - PGPASSWORD=password
       - POSTGRES_ENV_POSTGRES_PASSWORD=password
+      - DBSERVER=localhost
     ports:
       - 80
       - 443
-    links:
-      - db
-      - mailcatcher
     depends_on:
       - db
       - mailcatcher
     restart: unless-stopped
+    network_mode: "host"
   codecept:
     build:
       context: codeception
@@ -35,18 +35,20 @@ services:
         - ECCUBE_BRANCH=${ECCUBE_BRANCH}
         - ECCUBE_REPOS=${ECCUBE_REPOS}
         - DBTYPE=pgsql
-    links:
-      - mailcatcher
     depends_on:
       - browser
       - eccube3
     environment:
       - TZ=Asia/Tokyo
+      - DBSERVER=localhost
+      - SELENIUM_HOST=localhost
+      - BASE_URL=http://localhost/
     volumes:
       - ./tests:/project/tests
       - ./codeception.yml:/project/codeception.yml
       - ./ff_profile.zip.b64:/root/ff_profile.zip.b64
       - ./tests/_support/_downloads:/project/downloads
+    network_mode: "host"
   browser:
     image: selenium/standalone-firefox-debug:2.53.1
     ports:
@@ -57,6 +59,7 @@ services:
       - no_proxy=localhost
     volumes:
       - ./tests/_support/_downloads:/home/seluser/Downloads
+    network_mode: "host"
   mailcatcher:
     image: schickling/mailcatcher
     ports:
@@ -64,3 +67,4 @@ services:
       - 1025
     environment:
       - TZ=Asia/Tokyo
+    network_mode: "host"

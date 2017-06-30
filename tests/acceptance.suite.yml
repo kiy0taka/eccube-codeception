@@ -20,7 +20,7 @@ modules:
             cleanup: false
             reconnect: true
         WebDriver:
-            host: browser                 # Selenium ContainerのIP/hostname
+            host: %SELENIUM_HOST%                 # Selenium ContainerのIP/hostname
             port: 4444                      # Selenium Container内部の4444portにmapしたport番号
             url: '%BASE_URL%'    # テスト対象のurl
             window_size: 1680x3000
@@ -40,7 +40,7 @@ env:
                 WebDriver:
                     browser: firefox
                 Db:
-                    dsn: 'pgsql:host=db;dbname=cube3_dev'
+                    dsn: 'pgsql:host=%DBSERVER%;dbname=cube3_dev'
 
     front: # Backward compatibility
         modules:
@@ -48,14 +48,14 @@ env:
                 WebDriver:
                     browser: firefox
                 Db:
-                    dsn: 'pgsql:host=db;dbname=cube3_dev'
+                    dsn: 'pgsql:host=%DBSERVER%;dbname=cube3_dev'
     admin: # Backward compatibility
         modules:
             config:
                 WebDriver:
                     browser: firefox
                 Db:
-                    dsn: 'pgsql:host=db;dbname=cube3_dev'
+                    dsn: 'pgsql:host=%DBSERVER%;dbname=cube3_dev'
     firefox:
         modules:
             config:
@@ -76,9 +76,9 @@ env:
         modules:
             config:
                 Db:
-                    dsn: 'mysql:host=db;dbname=cube3_dev;charset=utf8'
+                    dsn: 'mysql:host=%DBSERVER%;dbname=cube3_dev;charset=utf8'
     pgsql:
         modules:
             config:
                 Db:
-                    dsn: 'pgsql:host=db;dbname=cube3_dev'
+                    dsn: 'pgsql:host=%DBSERVER%;dbname=cube3_dev'

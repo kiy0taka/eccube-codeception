@@ -13,7 +13,6 @@ RUN composer require captbaritone/mailcatcher-codeception-module "1.*"
 ## Clone EC-CUBE3
 
 ENV ECCUBE_PATH /var/www
-ENV BASE_URL="http://eccube3/"
 
 ARG ECCUBE_REPOS
 ARG ECCUBE_BRANCH
@@ -24,7 +23,6 @@ RUN cd /var && \
 
 WORKDIR ${ECCUBE_PATH}
 RUN composer install
-ENV DBSERVER db
 ENV DBPASS password
 ENV AUTH_MAGIC XjosAXOzO1B3mE0egwQA
 ENV MAIL_HOST mailcatcher
