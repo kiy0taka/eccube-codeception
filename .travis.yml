@@ -1,98 +1,65 @@
 sudo: required
 group: deprecated-2017Q2
-
 language: php
+services: docker
 
-services:
-  - docker
+# matrix:
+#   fast_finish: true
+#   allow_failures:
+#     - env: BROWSER=firefox DB=pgsql TARGET_GROUP=front TARGET_ENV=firefox,pgsql
+#     - env: BROWSER=firefox DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=firefox,pgsql
+#     - env: BROWSER=firefox DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=firefox,pgsql
+#     - env: BROWSER=firefox DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=firefox,pgsql
+#     - env: BROWSER=firefox DB=mysql TARGET_GROUP=front TARGET_ENV=firefox,mysql
+#     - env: BROWSER=firefox DB=mysql TARGET_GROUP=admin01 TARGET_ENV=firefox,mysql
+#     - env: BROWSER=firefox DB=mysql TARGET_GROUP=admin02 TARGET_ENV=firefox,mysql
+#     - env: BROWSER=firefox DB=mysql TARGET_GROUP=admin03 TARGET_ENV=firefox,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=front TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=front TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=front TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
+#     # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
+#     - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
+#     - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
+#     - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
+#     - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
 
-env:
-  ## Chrome, PostgreSQL
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql92 TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-  ## Chrome, MySQL
-  - BROWSER=chrome DB=mysql TARGET_GROUP=front TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql55 TARGET_GROUP=front TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql55 TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql55 TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
-  - BROWSER=chrome DB=mysql55 TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
-  # ## Use Plugins, Chrome, PostgreSQL
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-  # ## Use Plugins, Chrome, MySQL
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=front TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=front TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
-  # - USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
-  ## Firefox, PostgreSQL
-  - BROWSER=firefox DB=pgsql TARGET_GROUP=front TARGET_ENV=firefox,pgsql
-  - BROWSER=firefox DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=firefox,pgsql
-  - BROWSER=firefox DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=firefox,pgsql
-  - BROWSER=firefox DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=firefox,pgsql
-  ## Firefox, MySQL
-  - BROWSER=firefox DB=mysql TARGET_GROUP=front TARGET_ENV=firefox,mysql
-  - BROWSER=firefox DB=mysql TARGET_GROUP=admin01 TARGET_ENV=firefox,mysql
-  - BROWSER=firefox DB=mysql TARGET_GROUP=admin02 TARGET_ENV=firefox,mysql
-  - BROWSER=firefox DB=mysql TARGET_GROUP=admin03 TARGET_ENV=firefox,mysql
-  ## Sub Direcotry, Chrome, PostgreSQL
-  - DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-  - DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-  - DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-  - DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-
-matrix:
-  fast_finish: true
-  allow_failures:
-    - env: BROWSER=firefox DB=pgsql TARGET_GROUP=front TARGET_ENV=firefox,pgsql
-    - env: BROWSER=firefox DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=firefox,pgsql
-    - env: BROWSER=firefox DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=firefox,pgsql
-    - env: BROWSER=firefox DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=firefox,pgsql
-    - env: BROWSER=firefox DB=mysql TARGET_GROUP=front TARGET_ENV=firefox,mysql
-    - env: BROWSER=firefox DB=mysql TARGET_GROUP=admin01 TARGET_ENV=firefox,mysql
-    - env: BROWSER=firefox DB=mysql TARGET_GROUP=admin02 TARGET_ENV=firefox,mysql
-    - env: BROWSER=firefox DB=mysql TARGET_GROUP=admin03 TARGET_ENV=firefox,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=front TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=front TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin01 TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin02 TARGET_ENV=chrome,mysql
-    # - env: USE_PLUGIN=1 BROWSER=chrome DB=mysql55 TARGET_GROUP=admin03 TARGET_ENV=chrome,mysql
-    - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-    - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-    - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-    - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
-
-before_install:
-    - docker-compose -f docker-compose.yml ${DIRTYPE:+-f docker-compose.${DIRTYPE}.yml} -f docker-compose.${BROWSER}.yml -f docker-compose.${DB}.yml --project-name ${BROWSER}_${DB}_${TARGET_GROUP} build --no-cache
-script:
-    - docker-compose -f docker-compose.yml ${DIRTYPE:+-f docker-compose.${DIRTYPE}.yml} -f docker-compose.${BROWSER}.yml -f docker-compose.${DB}.yml --project-name ${BROWSER}_${DB}_${TARGET_GROUP} run --rm codecept run -d ${USE_PLUGIN:+-g plugin_installer -g plugin_uninstaller} -g ${TARGET_GROUP} --env ${TARGET_ENV}
-
+jobs:
+  include:
+    - stage: build docker image
+      script:
+        - docker-compose -f docker-compose.yml -f docker-compose.chrome.yml -f docker-compose.pgsql.yml --project-name travis_ci_build  build --no-cache
+        - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+        - docker images
+        - docker tag traviscibuild_codecept $DOCKER_USERNAME/travis_ci_build_codecept
+        - docker push $DOCKER_USERNAME/travis_ci_build_codecept
+        - docker tag traviscibuild_eccube3 $DOCKER_USERNAME/travis_ci_build_eccube3
+        - docker push $DOCKER_USERNAME/travis_ci_build_eccube3
+    - &test-staging
+      stage: Test Chrome/PostgreSQL
+      env: BROWSER=chrome DB=pgsql TARGET_ENV=chrome,pgsql TARGET_GROUP=front
+      before_install:
+        - sudo rm /usr/local/bin/docker-compose
+        - curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+        - chmod +x docker-compose
+        - sudo mv docker-compose /usr/local/bin
+      script:
+        - docker-compose -f docker-compose.travis.yml -f docker-compose.${BROWSER}.yml -f docker-compose.${DB}.yml pull --parallel
+        - docker-compose -f docker-compose.travis.yml -f docker-compose.${BROWSER}.yml -f docker-compose.${DB}.yml --project-name ${BROWSER}_${DB}_${TARGET_GROUP} run --rm codecept run -d ${USE_PLUGIN:+-g plugin_installer -g plugin_uninstaller} -g ${TARGET_GROUP} --env ${TARGET_ENV}
+    - <<: *test-staging
+      env: BROWSER=chrome DB=pgsql TARGET_ENV=chrome,pgsql TARGET_GROUP=admin01
+    - <<: *test-staging
+      env: BROWSER=chrome DB=pgsql TARGET_ENV=chrome,pgsql TARGET_GROUP=admin02
+    - <<: *test-staging
+      env: BROWSER=chrome DB=pgsql TARGET_ENV=chrome,pgsql TARGET_GROUP=admin03

@@ -1,0 +1,26 @@
+version: "2"
+services:
+  eccube3:
+    environment:
+      - TZ=Asia/Tokyo
+      - PGPASSWORD=password
+      - POSTGRES_ENV_POSTGRES_PASSWORD=password
+    ports:
+      - 80
+      - 443
+    restart: unless-stopped
+  codecept:
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./tests:/project/tests
+      - ./codeception.yml:/project/codeception.yml
+      - ./ff_profile.zip.b64:/root/ff_profile.zip.b64
+      - ./tests/_support/_downloads:/project/downloads
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1080
+      - 1025
+    environment:
+      - TZ=Asia/Tokyo

@@ -4,12 +4,7 @@ services:
     extends:
       file: docker-compose.common.yml
       service: eccube3
-    build:
-      context: eccube3
-      args:
-        - ECCUBE_BRANCH=${ECCUBE_BRANCH}
-        - ECCUBE_REPOS=${ECCUBE_REPOS}
-        - DBTYPE=pgsql
+    image: ${DOCKER_USERNAME}/travis_ci_build_eccube3
     depends_on:
       - db
       - mailcatcher
@@ -17,16 +12,11 @@ services:
     extends:
       file: docker-compose.common.yml
       service: codecept
-    build:
-      context: codeception
-      args:
-        - ECCUBE_BRANCH=${ECCUBE_BRANCH}
-        - ECCUBE_REPOS=${ECCUBE_REPOS}
-        - DBTYPE=pgsql
+    image: ${DOCKER_USERNAME}/travis_ci_build_codecept
     depends_on:
       - browser
       - eccube3
   mailcatcher:
     extends:
-      file: docker-compose.common.yml
+      file: docker-compose.yml
       service: mailcatcher
