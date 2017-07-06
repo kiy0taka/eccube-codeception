@@ -6,6 +6,10 @@ language: php
 services:
   - docker
 
+cache:
+  directories:
+    - $HOME/docker
+
 env:
   ## Chrome, PostgreSQL
   - BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
@@ -91,8 +95,10 @@ matrix:
     - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
     - env: DIRTYPE=subdir BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
 
+before_cache:
+    - mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}' | grep -v eccubecodeception | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
 before_install:
+    - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
     - docker-compose -f docker-compose.yml ${DIRTYPE:+-f docker-compose.${DIRTYPE}.yml} -f docker-compose.${BROWSER}.yml -f docker-compose.${DB}.yml --project-name ${BROWSER}_${DB}_${TARGET_GROUP} build --no-cache
 script:
     - docker-compose -f docker-compose.yml ${DIRTYPE:+-f docker-compose.${DIRTYPE}.yml} -f docker-compose.${BROWSER}.yml -f docker-compose.${DB}.yml --project-name ${BROWSER}_${DB}_${TARGET_GROUP} run --rm codecept run -d ${USE_PLUGIN:+-g plugin_installer -g plugin_uninstaller} -g ${TARGET_GROUP} --env ${TARGET_ENV}
-
