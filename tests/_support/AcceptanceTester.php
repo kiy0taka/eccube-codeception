@@ -151,9 +151,12 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function getLastDownloadFile($fileNameRegex, $retryCount = 3)
     {
+        echo "********** getLastDownloadFile($fileNameRegex, $retryCount) **********";
         $downloadDir = __DIR__ . '/_downloads/';
         $files = scandir($downloadDir);
+        var_dump($files);
         $files = array_map(function($fileName) use ($downloadDir) {
+            var_dump($downloadDir.$fileName);
             return $downloadDir.$fileName;
         }, $files);
         $files = array_filter($files, function($f) use ($fileNameRegex){

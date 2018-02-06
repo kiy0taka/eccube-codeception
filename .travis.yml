@@ -1,5 +1,5 @@
 sudo: required
-group: deprecated-2017Q4
+group: deprecated-2017Q2
 
 language: php
 
@@ -8,10 +8,7 @@ services:
 
 env:
   ## Chrome, PostgreSQL
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=front TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
-  - BROWSER=chrome DB=pgsql TARGET_GROUP=admin03 TARGET_ENV=chrome,pgsql
+  - BROWSER=chrome DB=pgsql TARGET_GROUP=ea3 TARGET_ENV=chrome,pgsql
   # - BROWSER=chrome DB=pgsql92 TARGET_GROUP=front TARGET_ENV=chrome,pgsql
   # - BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin01 TARGET_ENV=chrome,pgsql
   # - BROWSER=chrome DB=pgsql92 TARGET_GROUP=admin02 TARGET_ENV=chrome,pgsql
