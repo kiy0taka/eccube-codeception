@@ -18,8 +18,7 @@ services:
     environment:
       - TZ=Asia/Tokyo
       - APP_ENV=prod
-      - APP_DEBUG=1
-      - APP_SECRET=s$cretf0rt3st
+      - APP_DEBUG=0
       - MAILER_URL=smtp://mailcatcher:1025
       - ECCUBE_AUTH_MAGIC=secret
       - ECCUBE_FORCE_SSL=false
@@ -54,6 +53,7 @@ services:
       - eccube3
     environment:
       - TZ=Asia/Tokyo
+      - APP_DEBUG=0
       - ECCUBE_DB_HOST=db
       - ECCUBE_DB_USERNAME=eccube_user
       - ECCUBE_DB_PASSWORD=password
