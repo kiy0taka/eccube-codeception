@@ -34,7 +34,7 @@ RUN { \
 } > ${ECCUBE_PATH}/.env
 
 WORKDIR ${ECCUBE_PATH}
-RUN composer install
+RUN composer install --no-interaction -o --apcu-autoloader
 
 USER root
 

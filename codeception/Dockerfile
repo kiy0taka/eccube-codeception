@@ -4,7 +4,12 @@ MAINTAINER Kentaro Ohkouchi <nanasess@fsm.ne.jp>
 
 ### see also https://hub.docker.com/r/codeception/codeception/~/dockerfile/
 
-RUN echo "date.timezone = Asia/Tokyo" >> /usr/local/etc/php/php.ini
+RUN { \
+    echo "date.timezone = Asia/Tokyo"; \
+    echo "opcache.enable_cli = 1"; \
+    echo "apc.enable_cli = 1"; \
+    echo "memory_limit = -1"; \
+} >> ${PHP_INI_DIR}/php.ini
 
 ## Add mailcatcher-codeception-module
 WORKDIR /repo
@@ -29,7 +34,7 @@ RUN { \
     echo "APP_ENV=test"; \
     echo "APP_DEBUG=0"; \
 } > ${ECCUBE_PATH}/.env
-RUN composer install
+RUN composer install --no-interaction -o --apcu-autoloader
 
 ## create config yaml files
 WORKDIR /project
