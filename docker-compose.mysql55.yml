@@ -11,7 +11,13 @@ services:
     build:
       args:
         - DBTYPE=mysql
+    environment:
+      - DATABASE_URL=mysql://eccube_user:password@db:3306/eccube_db
+      - DATABASE_SERVER_VERSION=5
   codecept:
     build:
       args:
         - DBTYPE=mysql
+    environment:
+      - DATABASE_URL=mysql://eccube_user:password@db:3306/eccube_db
+      - DATABASE_SERVER_VERSION=5
