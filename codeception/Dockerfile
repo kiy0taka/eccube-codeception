@@ -1,4 +1,4 @@
-FROM eccube/php7-ext-codeception
+FROM kiy0taka/php7-ext-codeception:fix_php7.2
 
 MAINTAINER Kentaro Ohkouchi <nanasess@fsm.ne.jp>
 
