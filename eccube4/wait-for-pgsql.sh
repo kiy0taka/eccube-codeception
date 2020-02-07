@@ -13,6 +13,7 @@ done
 
 bin/console doctrine:schema:create
 bin/console eccube:fixtures:load
+psql -h db -U "${ECCUBE_DB_USERNAME}" eccube_db -c "update dtb_base_info set authentication_key='test';"
 
 bin/console cache:warmup --env=prod
 

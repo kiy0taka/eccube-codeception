@@ -15,11 +15,11 @@ services:
       - PGPASSWORD=password
       - POSTGRES_ENV_POSTGRES_PASSWORD=password
       - DATABASE_URL=pgsql://eccube_user:password@db:5432/eccube_db
-      - DATABASE_SERVER_VERSION=9
+      - DATABASE_SERVER_VERSION=10
   codecept:
     build:
       args:
         - DBTYPE=pgsql
     environment:
       - DATABASE_URL=pgsql://eccube_user:password@db:5432/eccube_db
-      - DATABASE_SERVER_VERSION=9
+      - DATABASE_SERVER_VERSION=10

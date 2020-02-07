@@ -27,6 +27,7 @@ services:
       - ECCUBE_TIMEZONE=Asia/Tokyo
       - ECCUBE_CURRENCY=JPY
       - ECCUBE_ADMIN_ROUTE=admin
+      - ECCUBE_PACKAGE_API_URL=http://mock-package-api:8080
     ports:
       - 80
       - 443
@@ -50,6 +51,7 @@ services:
     depends_on:
       - browser
       - eccube4
+      - mock-package-api
     environment:
       - TZ=Asia/Tokyo
       - ECCUBE_DB_HOST=db
@@ -72,6 +74,7 @@ services:
       - ./ff_profile.zip.b64:/root/ff_profile.zip.b64
       - ./tests/_support/_downloads:/var/www/html/codeception/_support/_downloads
       - ./tests/_envs:/var/www/html/codeception/_envs
+      - repos:/var/www/html//repos
   browser:
     image: selenium/standalone-chrome-debug:3.141.59-fluorine
     shm_size: 1g
@@ -89,3 +92,12 @@ services:
       - 1025
     environment:
       - TZ=Asia/Tokyo
+  mock-package-api:
+    image: eccube/mock-package-api
+    volumes:
+      - repos:/repos
+    environment:
+      - MOCK_REPO_DIR=repos
+
+volumes:
+  repos:
