@@ -16,6 +16,7 @@ done
 
 bin/console doctrine:schema:create
 bin/console eccube:fixtures:load
+mysql -h db -u root --password=password eccube_db -e "update dtb_base_info set authentication_key='test';"
 
 bin/console cache:warmup --env=prod
 
